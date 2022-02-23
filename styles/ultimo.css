@@ -119,12 +119,65 @@ body{
 }
 
 
+/* ----------LUPULOS---------------------- */
+
+.main-nueva__lupulos{
+    width: 85%;
+    border: black solid 0.1rem;
+    background-color: #CCC5B9;
+    border-radius: 0.5rem;
+}
 
 
 
+.alfa-container{
+	display: flex;
+	margin: auto;
+	width: 90%;
+	color: black;
+	border: solid black 0.1rem;
+	background-color: white;
+	border-radius: 0.5rem;
+	height: 2rem;
+}
+
+.listado-lupulo{
+	display: flex;
+	margin: auto;
+	width: 90%;
+	border: solid black 0.1rem;
+	background-color: white;
+	border-radius: 0.5rem;
+	height: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.tiempo-container{
+	display: flex;
+	margin: auto;
+	width: 90%;
+	color: black;
+	border: solid black 0.1rem;
+	background-color: white;
+	border-radius: 0.5rem;
+	height: 2rem;
+}
+
+.gramos-container{
+	display: flex;
+	margin: auto;
+	width: 90%;
+	color: black;
+	border: solid black 0.1rem;
+	background-color: white;
+	border-radius: 0.5rem;
+	height: 2rem;
+}
 
 
-
+.btn-agregar-lupulo{
+    background-color: #14213D;
+}
 
 
 
