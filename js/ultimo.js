@@ -16,10 +16,7 @@ fermentables.push(new Granos ("cara60", 34, 60));
 fermentables.push(new Granos ("cara120", 33, 120));
 fermentables.push(new Granos ("chocolate", 29, 400));
 
-
-
-
-    
+   
 const select = document.querySelector(".select-container");
 const extractoFermentables = document.querySelector(".extracto-container");
 const srmFermentables = document.querySelector(".srm-container");
@@ -49,6 +46,7 @@ select.appendChild(selectFermentables);
 
 selectFermentables.addEventListener("change", (e) => {
     let idElementoSeleccionado = e.target.value;
+    console.log(idElementoSeleccionado);
     let elementoSeleccionado = fermentables.find(fermentable => fermentable.nombre == idElementoSeleccionado);
     if(elementoSeleccionado == undefined){
         extractoFermentables.value = "";
@@ -146,12 +144,133 @@ function mostrar (){
 const boton = document.querySelector(".main-nueva__btn");
 boton.addEventListener("click", mostrar);
 
-let sumaKilos = document.querySelector("suma-kilos")
-kilosFermentables.addEventListener("change", (e) =>{
-    let idElementoSeleccionado = e.target.value;
-    console.log(idElementoSeleccionado);
-    sumaKilos.value = idElementoSeleccionado;
+
+
+/////---------------SECCION DE LUPULOS-----------------////
+
+
+
+class Lupulo{
+    constructor (nombre, AA){
+        this.nombre = nombre;
+        this.AA = AA;
+    }    
     
+}
+
+let arrLupulo = [];
+
+
+arrLupulo.push(new Lupulo("cascade", 0.08));
+arrLupulo.push(new Lupulo("Kent goldings", 0.05));
+arrLupulo.push(new Lupulo("Bravo", 0.12));
+arrLupulo.push(new Lupulo("Ekuanot", 0.11));
+arrLupulo.push(new Lupulo("Simcoe", 0.11));
+
+
+
+const selectHops = document.querySelector(".select-container-lupulo");
+const selectLupulos = document.createElement("select");
+selectLupulos.classList.add("listado-lupulo");
+
+const alfaLupulos = document.querySelector(".alfa-container");
+
+const tiempoLupulos = document.querySelector(".tiempo-container");
+
+
+const opcionDefaultLupulo = document.createElement("option");
+const opcionDefaultLupuloTexto = document.createTextNode("Seleccione Lupulo");
+opcionDefaultLupulo.appendChild(opcionDefaultLupuloTexto);
+selectLupulos.appendChild(opcionDefaultLupulo);
+
+const btnAgregarLupulo = document.querySelector(".btn-agregar-lupulo");
+
+for(const lupulo of arrLupulo){
+    const opcionLupulos = document.createElement("option");
+    opcionLupulos.textContent = lupulo.nombre;
+    selectLupulos.appendChild(opcionLupulos);
+}
+
+selectHops.appendChild(selectLupulos);
+
+
+selectLupulos.addEventListener("change", (e) => {
+    let idElementoSeleccionado = e.target.value;
+    let elementoSeleccionado = arrLupulo.find(lupulo => lupulo.nombre == idElementoSeleccionado);
+    
+    if(elementoSeleccionado == undefined){
+        alfaLupulos.value = "";
+    } else {
+        alfaLupulos.value = elementoSeleccionado.AA;
+    }
+})
+
+
+
+function mostrarLupulo (){
+
+    // codigos para agregar otra linea de fermentables
+    const selectHops = document.querySelector(".select-container-lupulo");
+    const selectLupulos = document.createElement("select");
+    selectLupulos.classList.add("listado-lupulo");
+    
+    // codigos para agregar otra linea de afa acidos
+    const alfaLupulosAdicional = document.querySelector(".alfa-container-adicional");
+    const alfaLupulosAdicionalInput = document.createElement("input");
+    alfaLupulosAdicionalInput.classList.add("alfa-container", "mb-2", "text-center");
+    alfaLupulosAdicional.appendChild(alfaLupulosAdicionalInput);
+    
+    //codigo para agregar otra linea de tiempo
+    const tiempoLupulosAdicinoal = document.querySelector(".tiempo-container-adicional");
+    const tiempoLupulosAdicinoalInput = document.createElement("input");
+    tiempoLupulosAdicinoalInput.classList.add("tiempo-container", "mb-2", "text-center");
+    tiempoLupulosAdicinoal.appendChild(tiempoLupulosAdicinoalInput);
+
+    //codigo para agregar otra linea de gramos
+    const gramosLupulosAdicinoal = document.querySelector(".gramos-container-adicional");
+    const gramosLupulosAdicinoalInput = document.createElement("input");
+    gramosLupulosAdicinoalInput.classList.add("gramos-container", "mb-2", "text-center");
+    gramosLupulosAdicinoal.appendChild(gramosLupulosAdicinoalInput);
+
+
+
+
+    //codigo para el texto default
+    const opcionDefaultLupulo = document.createElement("option");
+    const opcionDefaultLupuloTexto = document.createTextNode("Seleccione Lupulo");
+    opcionDefaultLupulo.appendChild(opcionDefaultLupuloTexto);
+    selectLupulos.appendChild(opcionDefaultLupulo);
+
+
+    //codigo para llenar la etiqueta select
+    for(const lupulo of arrLupulo){
+        const opcionLupulos = document.createElement("option");
+        opcionLupulos.textContent = lupulo.nombre;
+        selectLupulos.appendChild(opcionLupulos);
+    }
+
+    selectHops.appendChild(selectLupulos);
+
+    //evento para autocompletar el input alfa acido
+    selectLupulos.addEventListener("change", (e)=>{
+        let idElementoSeleccionado = e.target.value;
+        let elementoSeleccionado = arrLupulo.find(lupulo =>lupulo.nombre == idElementoSeleccionado);
+        
+
+        if(elementoSeleccionado == undefined){
+            alfaLupulosAdicionalInput.value = "";
+        }else{
+            alfaLupulosAdicionalInput.value = elementoSeleccionado.AA;
+        }
+    })
+
+
+
+}
+
+
+btnAgregarLupulo.addEventListener("click", () =>{
+    mostrarLupulo();
 })
 
 
@@ -168,63 +287,4 @@ kilosFermentables.addEventListener("change", (e) =>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("DOMContentLoaded", ()=>{
-//   mostrarObjetoGranos();
-// }) 
-
-// function mostrarObjetoGranos (){
-  
-//   const listadoFermCont = document.querySelector(".listado-ferms-container");
-//   const selectFerm = document.createElement("select");
-//   selectFerm.classList.add("listado-ferm", "mb-2");
-  
-//   const listadoExtractoCont = document.querySelector(".listado-ext");
-//   const divExtracto = document.createElement("div");
-//   divExtracto.classList.add("listado-extracto", "mb-2");
-
-//   const listadoSRMCont = document.querySelector(".listado-srm");
-//   const divSRM = document.createElement("div");
-//   divSRM.classList.add("listado-srm-style", "mb-2");
-
-//   const listadoKilosCont = document.querySelector(".listado-kilos");
-//   const inputKilos = document.createElement("input");
-//   inputKilos.classList.add("form-control", "rounded", "listado-kilos-style", "mb-2")
-  
-//   for(const item of fermentables){
-//     const optionFermentables = document.createElement("option");
-//     optionFermentables.textContent = item.nombre;
-//     selectFerm.appendChild(optionFermentables);  
-//   }
-  
-//   listadoFermCont.appendChild(selectFerm);
-//   listadoExtractoCont.appendChild(divExtracto);
-//   listadoSRMCont.appendChild(divSRM);
-//   // listadoKilosCont.appendChild(labelkilos);
-//   listadoKilosCont.appendChild(inputKilos);
-  
-// }    
-
-
-
-// const btnGranos = document.querySelector(".main-nueva__btn");
-// btnGranos.addEventListener("click", mostrarObjetoGranos);
 
