@@ -1,4 +1,28 @@
-let eficiencia;
+let batchContainer;
+let eficienciaContainer;
+
+
+//creo las variables que capturan la cantidad de litros
+
+const batch = document.querySelector(".batch");
+batch.addEventListener("change", (e)=> {
+    
+    batchContainer = parseInt(e.target.value);
+    if(isNaN(batchContainer)){
+        batchContainer = 0;
+    }
+})
+
+
+//creo las variables que capturan la eficiencia
+
+const eficiencia = document.querySelector(".eficiencia");
+eficiencia.addEventListener("change", (e)=>{
+    eficienciaContainer = parseInt(e.target.value);
+    if(isNaN(eficienciaContainer)){
+        eficienciaContainer = 0;
+    }
+})
 
 class Granos{
     constructor(nombre, extracto, color){
@@ -16,7 +40,7 @@ fermentables.push(new Granos ("cara60", 34, 60));
 fermentables.push(new Granos ("cara120", 33, 120));
 fermentables.push(new Granos ("chocolate", 29, 400));
 
-   
+
 const select = document.querySelector(".select-container");
 const extractoFermentables = document.querySelector(".extracto-container");
 const srmFermentables = document.querySelector(".srm-container");
@@ -46,7 +70,7 @@ select.appendChild(selectFermentables);
 
 selectFermentables.addEventListener("change", (e) => {
     let idElementoSeleccionado = e.target.value;
-    console.log(idElementoSeleccionado);
+    // console.log(idElementoSeleccionado);
     let elementoSeleccionado = fermentables.find(fermentable => fermentable.nombre == idElementoSeleccionado);
     if(elementoSeleccionado == undefined){
         extractoFermentables.value = "";
@@ -66,7 +90,20 @@ selectFermentables.addEventListener("change", (e) => {
 })
 
 
+//creo las variables para contener los kilos que usaré de malta de la primera fila
 
+let kilosContainer;
+kilosFermentables.addEventListener("change", (e)=>{
+    kilosContainer = parseInt(e.target.value);
+    if(isNaN(kilosContainer)){
+        kilosContainer = 0;
+        console.log(kilosContainer);
+        // console.log(typeof kilosContainer);
+    }
+})
+
+let lengthKilos = 0;
+let peras = [];
 
 function mostrar (){
     const select = document.querySelector(".select-container");
@@ -88,10 +125,10 @@ function mostrar (){
 
     const kilosFermentablesAdicional = document.querySelector(".kilos-container-adicional");
     const kilosFermentablesAdicionalInput = document.createElement("input");
-    kilosFermentablesAdicionalInput.classList.add("kilos-container", "text-center", "mb-2");
+    kilosFermentablesAdicionalInput.classList.add("kilos-container", "text-center", "mb-2", "kilos");
+    kilosFermentablesAdicionalInput.setAttribute("id", `kilos${lengthKilos+=1}`);
     kilosFermentablesAdicional.appendChild(kilosFermentablesAdicionalInput);
-
-
+    
 
     const selectFermentables = document.createElement("select");
     selectFermentables.classList.add("listado-ferm");
@@ -136,9 +173,19 @@ function mostrar (){
         }
     })
 
+    //genero las variables que contengan los valores de kilos de los inputs q se agregan al presionar "agregar"
+
+
+    const kilosContainerAdicional = document.querySelectorAll(".kilos");
+    console.log(kilosContainerAdicional);
+
+
+    array = Array.from(kilosContainerAdicional);
+    console.log(array);
 
 
 
+    
 }
 
 const boton = document.querySelector(".main-nueva__btn");
@@ -272,6 +319,10 @@ function mostrarLupulo (){
 btnAgregarLupulo.addEventListener("click", () =>{
     mostrarLupulo();
 })
+
+
+
+
 
 
 
