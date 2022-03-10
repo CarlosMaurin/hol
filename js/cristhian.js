@@ -103,6 +103,7 @@ selectFermentables.addEventListener("change", (e) => {
 // })
 
 let lengthKilos = 1;
+const arrayInputKilos = document.querySelectorAll(".kilos");
 
 function mostrar (){
     const select = document.querySelector(".select-container");
@@ -173,8 +174,8 @@ function mostrar (){
     })
 
     //genero las variables que contengan los valores de kilos de los inputs q se agregan al presionar "agregar"
-
     const arrayInputKilos = document.querySelectorAll(".kilos");
+
     arrayInputKilos.forEach(input => input.addEventListener("change", (e)=>{
         let existe =  arrayKilosTotal.some(kilos => kilos.idKilos === e.target.id);
         if(existe){
@@ -200,7 +201,6 @@ function mostrar (){
     }))
 
 }
-
 const boton = document.querySelector(".main-nueva__btn");
 boton.addEventListener("click", mostrar);
 
@@ -226,6 +226,9 @@ kilosFermentables.addEventListener("change", (e)=>{
     }
     console.log(arrayKilosTotal)
     calculoKilosTotal(arrayKilosTotal);
+
+
+
 })
 
 
@@ -237,6 +240,8 @@ function calculoKilosTotal (arrayKilosTotal){
     });
     console.log(cantidadTotalKilos);
     document.querySelector(".suma-kilos").value = cantidadTotalKilos;
+
+
 }
 
 
@@ -492,7 +497,87 @@ minutosHervor.appendChild(optionTiempo);
 
 }
 
-selecTiempo.appendChild(minutosHervor);
+
+
+
+
+
+//-----------------------LEVADURA------------------------///
+
+
+class levadura{
+    constructor (cepa, atenuacion){
+        this.cepa = cepa;
+        this.atenuacion = atenuacion;
+    }
+}
+
+
+
+const arrayLevadura = [];
+
+arrayLevadura.push(new levadura("US-05", 0.75));
+arrayLevadura.push(new levadura("S-04", 0.7));
+arrayLevadura.push(new levadura("windsor", 0.6));
+arrayLevadura.push(new levadura("nottingham", 0.8));
+
+
+const cepa = document.querySelector(".cepa");
+const selectCepa = document.createElement("select");
+selectCepa.classList.add("main-nueva__levadura__container", "text-center");
+
+const opcionDefaultLeva = document.createElement("option");
+const opcionDefaultLevaTexto = document.createTextNode("Seleccione Cepa");
+opcionDefaultLeva.appendChild(opcionDefaultLevaTexto);
+selectCepa.appendChild(opcionDefaultLeva);
+
+
+for(const levadura of arrayLevadura){
+    const opcionLevadura = document.createElement("option");
+    opcionLevadura.textContent = levadura.cepa;
+    selectCepa.appendChild(opcionLevadura);
+}
+
+cepa.appendChild(selectCepa);
+
+const atenuacion = document.querySelector(".atenuacion");
+
+selectCepa.addEventListener("change", (e)=>{
+    let seleccionLevadura = e.target.value;
+    let seleccionLevaduraObj = arrayLevadura.find(leva => seleccionLevadura === leva.cepa);
+    if(seleccionLevaduraObj ==  undefined){
+        atenuacion.value = " ";
+    }else{
+        atenuacion.value = seleccionLevaduraObj.atenuacion;
+    }
+})
+
+
+
+
+//-----------------CALCULO DEL COLOR------------------------//
+
+// for(i=0; i<fermentables.length; i+=1){
+//     fermentables[i].mcu = fermentables[i].kilos * fermentables[i].color;
+//  }
+
+
+let arrayKilosColor = [];
+// arrayKilosTotal.forEach(input => input.addEventListener("change", (e)=>{
+//     arrayKilosColor = arrayKilosTotal.map(kiloColor => kiloColor*5);
+// }))
+
+
+
+
+
+
+
+
+let arrayColor = fermentables.map(color => color.color);
+
+
+
 
 
 
